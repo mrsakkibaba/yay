@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valentine's Day</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #ff7f7f, #ff4d4d);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .container {
+      text-align: center;
+      background: rgba(255, 255, 255, 0.8);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      position: relative;
+      z-index: 2;
+      width: 90%;
+      max-width: 400px;
+    }
+
+    h1 {
+      font-size: 2rem;
+      color: #ff4d4d;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 10px;
+      transition: background 0.3s ease;
+    }
+
+    #next-btn {
+      background: #ff4d4d;
+      color: white;
+    }
+
+    #yes-btn {
+      background: #4CAF50;
+      color: white;
+    }
+
+    #no-btn {
+      background: #f44336;
+      color: white;
+      position: absolute;
+      transition: all 0.5s ease;
+    }
+
+    .balloon {
+      position: absolute;
+      width: 60px;
+      height: 90px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.7;
+      z-index: 1;
+      animation: float 6s infinite ease-in-out;
+    }
+
+    .balloon::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      width: 2px;
+      height: 30px;
+      background: white;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .audio-player {
+      margin-top: 20px;
+    }
+
+    audio {
+      width: 100%;
+      max-width: 300px;
+      margin-top: 10px;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      p {
+        font-size: 0.8rem;
+      }
+
+      button {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+      }
+
+      .balloon {
+        width: 50px;
+        height: 75px;
+      }
+
+      .balloon::after {
+        height: 25px;
+        bottom: -10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="message1">
+      <h1>Happy Valentine's Day QT!</h1>
+      <p>You make every day special just by being in it. Yes, you read that correct. </p>
+      <p>Since you came into my world, My life has never remained the same. </p>
+      <p>You have this incredible way of making the ordinary feel magical, and every moment spent  with you is something I cherish deeply. </p>
+      <p>Today, on Valentine’s Day, I just want to take a moment to tell you how much you mean to me. </p>
+      <p>Your smile is my favorite sight, your laughter, my favorite melody and your love, the greatest gift I could ever ask for. Every day with you is special, but today, I want to make sure you know how special you are to me. </p>
+      <p>Today, on Valentine’s Day, I just want to take a moment to tell you how much you mean to me. </p>
+      <p>From sitting on a single bench to watching you grow on status, Forever Glad to be there- Saksham. </p>
+      <button id="next-btn">Next</button>
+    </div>
+    <div id="message2" class="hidden">
+      <h1>Will you be my Valentine?</h1>
+      <button id="yes-btn">Yes</button>
+      <button id="no-btn">No</button>
+    </div>
+    <!-- Audio Player -->
+    <div class="audio-player">
+      <p>Play our special song:</p>
+      <audio id="valentine-audio">
+        <source src="special-song.mp3" type="audio/mpeg">
+      </audio>
+      <button id="play-btn">Play Song</button>
+    </div>
+  </div>
+
+  <!-- Balloons -->
+  <div class="balloon" style="top: 10%; left: 10%;"></div>
+  <div class="balloon" style="top: 20%; left: 30%;"></div>
+  <div class="balloon" style="top: 5%; left: 50%;"></div>
+  <div class="balloon" style="top: 15%; left: 70%;"></div>
+  <div class="balloon" style="top: 25%; left: 90%;"></div>
+
+  <script>
+    const nextBtn = document.getElementById('next-btn');
+    const message1 = document.getElementById('message1');
+    const message2 = document.getElementById('message2');
+    const noBtn = document.getElementById('no-btn');
+    const playBtn = document.getElementById('play-btn');
+    const audio = document.getElementById('valentine-audio');
+
+    nextBtn.addEventListener('click', () => {
+      message1.classList.add('hidden');
+      message2.classList.remove('hidden');
+    });
+
+    noBtn.addEventListener('mouseover', () => {
+      const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+      const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+      noBtn.style.left = `${x}px`;
+      noBtn.style.top = `${y}px`;
+    });
+
+    document.getElementById('yes-btn').addEventListener('click', () => {
+      alert('YaY! You made me the happiest person!, Let me know how you feel. 😂💖');
+    });
+
+    // Play audio on button click
+    playBtn.addEventListener('click', () => {
+      if (audio.paused) {
+        audio.play();
+        playBtn.textContent = 'Pause Song';
+      } else {
+        audio.pause();
+        playBtn.textContent = 'Play Song';
+      }
+    });
+  </script>
+</body>
+</html>
